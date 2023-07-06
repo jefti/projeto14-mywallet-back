@@ -1,5 +1,4 @@
 import joi from "joi";
-import { tlds } from '@hapi/tlds';
 
 const userSchema = joi.object({
     name: joi.string().required(),

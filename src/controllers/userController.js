@@ -64,10 +64,19 @@ export async function signin(req, res){
 
         return res.status(401).send('Senha incorreta !');
     }catch(err){
+        console.log(err);
         return res.sendStatus(500);
     }
-
-
-
-
 }
+ export async function signout(req, res){
+    try{
+        const {token} = req.body;
+        const sessao = await db.collection("sessions").findOne({token});
+        if(!sessao) return res.status(404).send('Token não encontrado!');
+        await db.collection("sessions").deleteOne({token});
+        return res.status(204).send('Usuario deslogado com sucesso !')
+    }catch(err){
+        console.log(err);
+        return res.sendStatus(500);
+    }
+ }

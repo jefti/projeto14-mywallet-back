@@ -3,7 +3,8 @@ import express  from 'express';
 import dotenv from 'dotenv';
 import { MongoClient } from 'mongodb';
 
-import { signin, signup, getUsers, getSessions } from './controllers/userController.js';
+import { signin, signup, getUsers, getSessions,signout } from './controllers/userController.js';
+import { postTransaction, getTransaction } from './controllers/transactionController.js';
 
 const app = express();
 
@@ -31,6 +32,11 @@ app.post("/sign-in", signin);
 app.get("/users",getUsers);
 app.get("/sessions",getSessions);
 
+app.post("/transaction", postTransaction);
+
+app.get('/transaction', getTransaction);
+
+app.delete("/sessions", signout);
 
 
 const Port = 5000;
