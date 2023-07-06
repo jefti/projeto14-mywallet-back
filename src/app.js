@@ -3,7 +3,7 @@ import express  from 'express';
 import dotenv from 'dotenv';
 import { MongoClient } from 'mongodb';
 
-import { signup } from './controllers/userController.js';
+import { signin, signup, getUsers, getSessions } from './controllers/userController.js';
 
 const app = express();
 
@@ -21,11 +21,15 @@ try{
 
 export const db = mongoClient.db();
 
-app.post("/sign-up", signup);
-
 app.get('/ping', (req,res)=>{
     res.send('conectado ...');
 })
+
+app.post("/sign-up", signup);
+app.post("/sign-in", signin);
+
+app.get("/users",getUsers);
+app.get("/sessions",getSessions);
 
 
 
