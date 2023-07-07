@@ -33,11 +33,10 @@ app.get("/users",getUsers);
 app.get("/sessions",getSessions);
 
 app.post("/transaction", postTransaction);
-
 app.get('/transaction', getTransaction);
 
 app.delete("/sessions", signout);
 
 
-const Port = 5000;
+const Port = process.env.PORT || 5000;
 app.listen(Port, ()=> console.log(`Servidor rodando na porta ${Port}`));

@@ -14,7 +14,7 @@ export async function postTransaction(req,res){
         const sessao = await db.collection("sessions").findOne({token: transactionReq.token});
 
         if(!sessao) return res.sendStatus(422);
-        
+
         const newTrasaction = {
             value: transactionReq.value, 
             description: transactionReq.description,
@@ -28,7 +28,6 @@ export async function postTransaction(req,res){
         return res.send(500);
     }
 }
-
 
 export async function getTransaction(req, res){
     try{
