@@ -1,5 +1,5 @@
-import { db } from "../app.js";
-import { validateTransaction } from "../schemas/transactionSchema.js";
+import  db  from "../database/database.connection.js";
+import { validateTransaction } from "../middlewares/validationSchema.js";
 import dayjs from "dayjs";
 
 export async function postTransaction(req,res){

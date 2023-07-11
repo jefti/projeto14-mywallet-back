@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { signin, signup, getUsers, getSessions,signout } from '../controllers/userController.js';
 import { postTransaction, getTransaction } from '../controllers/transactionController.js';
+import { validateTransaction, validateUser, validateLogin } from '../middlewares/validationSchema.js';
 
 const router = Router();
 

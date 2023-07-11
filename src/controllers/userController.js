@@ -1,8 +1,7 @@
-import { db } from "../app.js";
+import  db  from '../database/database.connection.js';
 import bcrypt from 'bcrypt';
 import { v4 as uuid } from 'uuid';
-import { validateUser, validateLogin } from "../schemas/userSchema.js";
-
+import { validateUser, validateLogin } from '../middlewares/validationSchema.js';
 
 
 export async function getUsers(req, res){

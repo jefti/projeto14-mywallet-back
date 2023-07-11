@@ -4,25 +4,16 @@ import dotenv from 'dotenv';
 import dayjs from 'dayjs';
 import { MongoClient } from 'mongodb';
 import router from './routes/routes.js';
+import  db  from './database/database.connection.js';
 
-import { signin, signup, getUsers, getSessions,signout } from './controllers/userController.js';
-import { postTransaction, getTransaction } from './controllers/transactionController.js';
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
-dotenv.config();
 
-const mongoClient = new MongoClient(process.env.DATABASE_URL);
-try{
-    mongoClient.connect();
-    console.log('Mongodb conectado!');
-}catch (err){
-    console.log(err.message);
-}
 
-export const db = mongoClient.db();
+
 
 app.get('/ping', (req,res)=>{
     res.send('conectado ...');
