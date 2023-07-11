@@ -1,5 +1,6 @@
 import { db } from "../app.js";
 import { validateTransaction } from "../schemas/transactionSchema.js";
+import dayjs from "dayjs";
 
 export async function postTransaction(req,res){
     try{
@@ -23,7 +24,8 @@ export async function postTransaction(req,res){
             value: transactionReq.value, 
             description: transactionReq.description,
             type: transactionReq.type,
-            userId: sessao.userId
+            userId: sessao.userId,
+            data: dayjs().format('DD/MM')
         };
         await db.collection("transactions").insertOne(newTrasaction);
         return res.sendStatus(200);
