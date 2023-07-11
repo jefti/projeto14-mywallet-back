@@ -59,7 +59,7 @@ export async function signin(req, res){
         if(teste){
             const token = uuid();
             await db.collection("sessions").insertOne({userId: user._id,token});
-            return res.send(token).status(200);
+            return res.send({...user, token}).status(200);
         }
 
         return res.status(401).send('Senha incorreta !');
