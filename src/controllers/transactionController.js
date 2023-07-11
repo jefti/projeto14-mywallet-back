@@ -17,7 +17,7 @@ export async function postTransaction(req,res){
         }
 
         const sessao = await db.collection("sessions").findOne({token});
-
+        const time = new Date();
         if(!sessao) return res.sendStatus(422);
 
         const newTrasaction = {
@@ -25,7 +25,8 @@ export async function postTransaction(req,res){
             description: transactionReq.description,
             type: transactionReq.type,
             userId: sessao.userId,
-            data: dayjs().format('DD/MM')
+            data: dayjs().format('DD/MM'),
+            time: time
         };
         await db.collection("transactions").insertOne(newTrasaction);
         return res.sendStatus(200);
@@ -43,7 +44,7 @@ export async function getTransaction(req, res){
         const session = await db.collection("sessions").findOne({token});
         if (!session) return res.sendStatus(401);
 
-        const transactions = await db.collection("transactions").find({userId: session.userId}).toArray();
+        const transactions = await db.collection("transactions").find({userId: session.userId}).sort({time:-1}).toArray();
         return res.send(transactions);
     } catch(err){
         return res.sendStatus(500);
