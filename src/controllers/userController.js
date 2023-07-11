@@ -70,9 +70,10 @@ export async function signin(req, res){
 }
  export async function signout(req, res){
     try{
-        const { authorization } = req.header;
+        const { authorization } = req.headers;
         const token = authorization?.replace('Bearer ', '');
         if(!token) return res.sendStatus(401);
+
         const sessao = await db.collection("sessions").findOne({token});
         if(!sessao) return res.status(404).send('Token não encontrado!');
         await db.collection("sessions").deleteOne({token});
